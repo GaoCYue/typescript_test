@@ -1,12 +1,12 @@
 /* eslint-disable no-extend-native */
 import { accAdd, accSub, accMul, accDiv } from './expansionPrototype/number'
 declare global {
-    interface Number {
-        accAdd(arg: number): number
-        accSub(arg: number): number
-        accMul(arg: number): number
-        accDiv(arg: number): number
-    }
+  interface Number {
+    accAdd(arg: number): number
+    accSub(arg: number): number
+    accMul(arg: number): number
+    accDiv(arg: number): number
+  }
 }
 
 Number.prototype.accAdd = function (arg) {
