@@ -8,7 +8,7 @@ module.exports = {
     filename: 'app.js', // 打包文件名，默认在 `dist` 目录下
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js"]
+    extensions: [".ts",".tsx", ".js"]
   },
   module: {
     rules: [
