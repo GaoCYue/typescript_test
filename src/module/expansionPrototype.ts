@@ -1,4 +1,5 @@
 /* eslint-disable no-extend-native */
+
 import { accAdd, accSub, accMul, accDiv } from './expansionPrototype/number'
 declare global {
   interface Number {
