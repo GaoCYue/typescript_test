@@ -134,18 +134,42 @@ function _quicksort<T> (arr: Array<T>, begin:number, end:number): void {
 }
 
 function _partition<T> (arr:Array<T>, begin:number, end:number): number {
-  // 可以是任意值，默认为最后一个
+  // 随机选择一个目标值
   const targetIndex = begin + Math.floor((end - begin) * Math.random());
+  // 将目标值与最后一位调换位置，统一算法后续步骤
   [arr[targetIndex], arr[end]] = [arr[end], arr[targetIndex]]
-
+  // 确定被比较的目标值
+  const targetValue = arr[end]
+  /**
+   * i 表示比目标小的元素区域的后一位
+   * 遍历数组找到比targetValue 小的元素，交换位置，i++
+   * 遍历结束后，目标数组中比targetValue小的元素全部位于i 的前面
+   * 交换i 与arr[end]的位置，此时arr[i]前面比arr[i]小，后面大于等于arr[i]，完成分割，返回i
+   *
+   * 或者，如果需要将目标元素设置为第一个元素的话，则需要将循环的起始位置设为数组的末尾
+   * i 表示比目标小的元素区域的前一位，j 寻找比targetValue 大的元素，交换位置
+   * 最后i 后面大于targetValue,i 前面小于等于targetValue，i为targetValue，返回i
+   */
   let i = begin // i 表示比 targetValue 大的第一个元素
   for (let j = begin; j <= end; j++) {
-    if (arr[j] < arr[targetIndex]) { // 类似选择排序，将比目标小的插入到前面
+    if (arr[j] < targetValue) { // 类似选择排序，将比目标小的插入到前面
       if (i !== j) { [arr[i], arr[j]] = [arr[j], arr[i]] }
       i++
     }
   }
   [arr[i], arr[end]] = [arr[end], arr[i]]
+  /**
+   * 另一种方法：
+   * 目标元素在末尾
+   * 可以一头一尾两个指针（i， j），i先动，寻找比targetValue大（=）的元素，找到后i固定，j在动，寻找比i小的元素（注意，j>i）,
+   * 找到后交换i和j的位置的元素值。（i先动是因为最后要交换目标值的位置，此时目标值在最后，需要一个大于等于目标值的元素，需要用i来找）
+   * i继续向前移动，知道i，j相遇。此时，调换i与末尾位置的元素值，返回i
+   *
+   * 或者目标元素在头部
+   * 可以一头一尾两个指针（i， j），j先动，寻找比targetValue小的元素，找到后j固定，i在动，寻找比i大（=）的元素（注意，j>i）,
+   * 找到后交换i和j的位置的元素值。（j先动是因为最后要交换目标值的位置，此时目标值在头部，需要一个小于的元素，需要用j来找）
+   * j继续向前移动，知道i，j相遇。此时，调换j与头部位置的元素值，返回j
+   */
   return i
 }
 
