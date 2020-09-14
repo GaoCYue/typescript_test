@@ -181,10 +181,10 @@ export {
   quicksort // 快速
 }
 
-class SortArray<T> extends Array<T> {
-  constructor () {
-    super()
-  }
-}
+// class SortArray<T> extends Array<T> {
+//   constructor () {
+//     super()
+//   }
+// }
 
 // const test arr = new Array([1])
